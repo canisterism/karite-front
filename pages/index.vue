@@ -16,7 +16,7 @@
         <!-- <a href class="button is-info" @click="searchByTitle">Search book!</a> -->
       </div>
       <div class>
-        <div class="content card" v-for="book in filteredBooks">{{book.title}}</div>
+        <div class="content card" v-for="book in books">{{book.title}}</div>
       </div>
     </div>
   </section>
@@ -27,17 +27,17 @@ import axios from "axios";
 import Logo from "~/components/Logo.vue";
 import throttle from "lodash/throttle";
 
-const BOOKS_URL = "http://localhost:3000/books";
+const BOOKS_SEARCH_URL = "http://localhost:3000/books/search?title=";
 
 export default {
   asyncData() {
-    return Promise.resolve(axios.get(BOOKS_URL))
-      .then(books => {
-        return {
-          books: books.data
-        };
-      })
-      .catch(console.error);
+    // return Promise.resolve(axios.get(BOOKS_URL))
+    //   .then(books => {
+    //     return {
+    //       books: books.data
+    //     };
+    //   })
+    //   .catch(console.error);
   },
   components: {
     Logo
@@ -45,7 +45,7 @@ export default {
   data: function() {
     return {
       searchWord: "",
-      filteredBooks: []
+      books: []
     };
   },
   created: function() {
@@ -58,10 +58,15 @@ export default {
   },
   methods: {
     searchBookByTitle: function() {
-      const vm = this;
-      this.filteredBooks = this.books.filter(function(book) {
-        return book.title.indexOf(vm.searchWord) !== -1;
-      });
+      const axiosPromise = Promise.resolve(
+        axios.get(BOOKS_SEARCH_URL + this.searchWord)
+      );
+      axiosPromise
+        .then(res => {
+          console.log(res.data);
+          this.books = res.data;
+        })
+        .catch(console.error);
     }
   }
 };
