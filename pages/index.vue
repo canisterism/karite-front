@@ -30,15 +30,7 @@ import throttle from "lodash/throttle";
 const BOOKS_SEARCH_URL = "http://localhost:3000/books/search?title=";
 
 export default {
-  asyncData() {
-    // return Promise.resolve(axios.get(BOOKS_URL))
-    //   .then(books => {
-    //     return {
-    //       books: books.data
-    //     };
-    //   })
-    //   .catch(console.error);
-  },
+  asyncData() {},
   components: {
     Logo
   },
@@ -58,12 +50,11 @@ export default {
   },
   methods: {
     searchBookByTitle: function() {
-      const axiosPromise = Promise.resolve(
-        axios.get(BOOKS_SEARCH_URL + this.searchWord)
-      );
-      axiosPromise
+      if (this.searchWord === "") {
+        return;
+      }
+      Promise.resolve(axios.get(BOOKS_SEARCH_URL + this.searchWord))
         .then(res => {
-          console.log(res.data);
           this.books = res.data;
         })
         .catch(console.error);
