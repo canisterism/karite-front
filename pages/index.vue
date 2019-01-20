@@ -5,6 +5,10 @@
       <h1 class="title">karite-front</h1>
       <h2 class="subtitle">frontend for karite</h2>
       <div class="field">
+        <a href class="button is-info" @click="SwitchToByTitle">Search by Title!</a>
+        <a href class="button is-success" @click="SwitchToByIsbn">Search by ISBN!</a>
+      </div>
+      <div class="field">
         <div class="control content">
           <input
             class="input is-primary"
@@ -13,10 +17,10 @@
             v-model="searchWord"
           >
         </div>
-        <!-- <a href class="button is-info" @click="searchByTitle">Search book!</a> -->
       </div>
+      <!-- <p>{{by}}</p> -->
       <div class>
-        <div class="content card" v-for="book in books">{{book.title}}</div>
+        <div class="content card" v-for="book in books">{{book.title}} ISBN: {{book.isbn}}</div>
       </div>
     </div>
   </section>
@@ -27,7 +31,9 @@ import axios from "axios";
 import Logo from "~/components/Logo.vue";
 import throttle from "lodash/throttle";
 
-const BOOKS_SEARCH_URL = "http://localhost:3000/books/search?title=";
+const BASE_URL = "http://localhost:3000/books/search/";
+const TITLE = "title/";
+const ISBN = "isbn/";
 
 export default {
   asyncData() {},
@@ -37,27 +43,41 @@ export default {
   data: function() {
     return {
       searchWord: "",
-      books: []
+      books: [],
+      by: ISBN
     };
   },
   created: function() {
-    this.searchBookWithInterval = throttle(this.searchBookByTitle, 1000);
+    this.searchBooksWithInterval = throttle(this.searchBooks, 1000);
+  },
+  computed: {
+    // searchBy: function() {
+    //   return this.store.state.searchBy; //ここ治す
+    // }
   },
   watch: {
     searchWord: function() {
-      this.searchBookWithInterval();
+      this.searchBooksWithInterval();
     }
   },
   methods: {
-    searchBookByTitle: function() {
+    searchBooks: function() {
       if (this.searchWord === "") {
         return;
       }
-      Promise.resolve(axios.get(BOOKS_SEARCH_URL + this.searchWord))
+      Promise.resolve(axios.get(BASE_URL + this.by + this.searchWord))
         .then(res => {
           this.books = res.data;
         })
         .catch(console.error);
+    },
+    SwitchToByTitle: function() {
+      // $store.commit("searchByTitle");
+      this.by = TITLE;
+    },
+    SwitchToByIsbn: function() {
+      // $store.commit("searchByTitle");
+      this.by = ISBN;
     }
   }
 };
