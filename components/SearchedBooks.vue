@@ -14,15 +14,10 @@
 <script>
 export default {
   name: "SearchedBooks",
-  data: function() {
-    return {
-      books: [
-        {
-          title: "hoge",
-          cover: "https://cover.openbd.jp/9784274068768.jpg"
-        }
-      ]
-    };
+  computed: {
+    books: function() {
+      return this.$store.state.books;
+    }
   }
 };
 </script>

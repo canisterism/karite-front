@@ -1,30 +1,33 @@
-// export const state = () => ({
-//   searchBy: "title"
-// })
-
-// export const mutations = {
-//   searchByTitle(state) {
-//     state.searchBy = "title"
-//   },
-//   searchByIsbn(state) {
-//     state.searchBy = "isbn"
-//   }
-// }
-
-// const store = () => new Vuex.Store({
-//   state: {
+// const createStore = () => {
+//   return new Vuex.Store({
 //     state: () => ({
-//       searchBy: "title"
+//       books: []
 //     }),
 //     mutations: {
-//       searchByTitle(state) {
-//         state.searchBy = "title"
-//       },
-//       searchByIsbn(state) {
-//         state.searchBy = "isbn"
+//       searchResult(state, books) {
+//         state.books = books;
 //       }
 //     }
-//   }
-// })
+//   })
+// }
 
-// export default store
+// export default createStore
+
+import Vuex from 'vuex'
+
+const state = () => ({
+  books: []
+})
+
+const mutations = {
+  searchResult(state, books) {
+    state.books = books;
+  }
+}
+
+const store = () => new Store({
+  state,
+  mutations
+})
+
+export default store

@@ -15,7 +15,6 @@ import SearchWindow from "~/components/SearchWindow.vue";
 import SearchedBooks from "~/components/SearchedBooks.vue";
 
 export default {
-  asyncData() {},
   components: {
     Logo,
     SearchWindow,

@@ -42,7 +42,8 @@ export default {
       }
       Promise.resolve(axios.get(BASE_URL + this.searchWord))
         .then(res => {
-          this.books = res.data;
+          let books = res.data;
+          this.$store.commit("searchResult", books);
         })
         .catch(console.error);
     }
