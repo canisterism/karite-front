@@ -1,33 +1,17 @@
-// const createStore = () => {
-//   return new Vuex.Store({
-//     state: () => ({
-//       books: []
-//     }),
-//     mutations: {
-//       searchResult(state, books) {
-//         state.books = books;
-//       }
-//     }
-//   })
-// }
+import Vuex from 'vuex';
 
-// export default createStore
+const store = {
+  state: {
+    books: []
+  },
+  getters: {
+    books: state => state.books
+  },
+  mutations: {
+    setBooks(state, { books }) {
+      state.books = books;
+    }
+  },
+};
 
-import Vuex from 'vuex'
-
-const state = () => ({
-  books: []
-})
-
-const mutations = {
-  searchResult(state, books) {
-    state.books = books;
-  }
-}
-
-const store = () => new Store({
-  state,
-  mutations
-})
-
-export default store
+export default () => new Vuex.Store(store);
