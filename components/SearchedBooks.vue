@@ -1,9 +1,9 @@
 <template>
   <div id="SearchedBooks">
-    <div class>
-      <div class="content card" v-for="book in books">
+    <div class="columns is-multiline">
+      <div id="card" class="content card column is-4" v-for="book in books">
         <div class="card-image">
-          <figure class="image is-4by5">
+          <figure class="image">
             <img :src="book.cover" class="cover_image" alt="cover">
           </figure>
         </div>
@@ -11,13 +11,10 @@
         <div class="card-content">
           <div class="media">
             <div class="media-content">
-              <p class="title is-4">{{book.title}}</p>
-              <p class="subtitle is-6">{{book.author}}</p>
+              <p class="is-size-6">{{book.title}}</p>
+              <p class="has-text-grey is-size-7">by {{book.author}}</p>
+              <p class="has-text-grey is-size-7">{{book.pubdate}}</p>
             </div>
-          </div>
-
-          <div class="content">
-            <time>{{book.published}}</time>
           </div>
         </div>
 
@@ -54,5 +51,9 @@ export default {
 <style scoped>
 #SearchedBooks {
   margin: 25px;
+}
+
+#card {
+  padding: 10px;
 }
 </style>

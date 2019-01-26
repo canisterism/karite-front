@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div class="column is-6">
+    <div class="column is-10">
       <logo/>
       <SearchWindow></SearchWindow>
       <SearchedBooks></SearchedBooks>
