@@ -1,6 +1,5 @@
 <template>
-  <div class="SearchWindow">
-    <h2 class="subtitle">Search the Book!</h2>
+  <div id="SearchWindow">
     <div class="field">
       <div class="control content">
         <input
