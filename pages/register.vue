@@ -1,27 +1,31 @@
 <template>
   <section class="container">
-    <div class="column is-6">
+    <div>
       <logo/>
-      <SearchWindow></SearchWindow>
-      <SearchedBooks></SearchedBooks>
+      <h1 class="title">Edmond</h1>
+      <div>
+        <h2 class="subtitle is-size-3">Search the Book!</h2>
+        <div class="field">
+          <div class="control content">
+            <input class="input is-primary" type="text" placeholder="ピッしてね！" v-model="isbn">
+          </div>
+        </div>
+      </div>
+      <nuxt-link to="/">検索する</nuxt-link>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from "~/components/Logo.vue";
-import SearchWindow from "~/components/SearchWindow.vue";
-import SearchedBooks from "~/components/SearchedBooks.vue";
 
 export default {
   components: {
-    Logo,
-    SearchWindow,
-    SearchedBooks
+    Logo
   },
   data: function() {
     return {
-      books: []
+      isbn: ""
     };
   }
 };
