@@ -1,5 +1,5 @@
 <template>
-  <div id="SearchWindow">
+  <div id="SearchWindow" class="column">
     <div class="field">
       <div class="control content">
         <input
@@ -14,10 +14,11 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import axios from "~/plugins/axios";
 import throttle from "lodash/throttle";
 
-const BASE_URL = "http://localhost:3000/books/search/title/";
+const SEARCH_PATH = "books/search/title/";
 
 export default {
   name: "SearchWindow",
@@ -39,7 +40,7 @@ export default {
       if (this.searchWord === "") {
         return;
       }
-      Promise.resolve(axios.get(BASE_URL + this.searchWord))
+      Promise.resolve(axios.get(SEARCH_PATH + this.searchWord))
         .then(res => {
           let books = res.data;
           this.$store.commit("setBooks", { books });

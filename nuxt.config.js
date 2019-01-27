@@ -71,5 +71,8 @@ module.exports = {
     extend(config, ctx) {
     }
   },
-  mode: "spa"
+  mode: "spa",
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://karite-api.herokuapp.com'
+  }
 }
